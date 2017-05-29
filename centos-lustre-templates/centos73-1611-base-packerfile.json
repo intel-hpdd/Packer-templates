@@ -1,0 +1,57 @@
+{
+	"_comment": "Packer description for a minimal CentOS Server",
+	"_comment": "Provides basis for creating Lustre servers and",
+	"_comment": "clients (compute nodes)",
+
+	"variables": {
+		"account_name": "",
+		"box_name": "",
+		"version": ""
+	},
+
+	"builders": [
+		{
+			"vm_name": "CentOS-73-base",
+			"type": "virtualbox-iso",
+			"guest_os_type": "RedHat_64",
+			"hard_drive_interface": "sata",
+			"iso_url":
+				"http://mirrors.kernel.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso",
+			"iso_checksum_url": "http://mirrors.kernel.org/centos/7/isos/x86_64/sha256sum.txt.asc",
+			"iso_checksum_type": "sha256",
+			"guest_additions_mode": "disable",
+			"headless": true,
+			"ssh_username": "vagrant",
+			"ssh_password": "vagrant",
+			"ssh_timeout": "15m",
+			"http_directory" : "httpfiles",
+			"boot_command": [
+				"<tab><wait>",
+				" ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart/base.ks",
+				"<enter>"
+			],
+			"shutdown_command": "sudo shutdown --poweroff now"
+		}
+	],
+
+	"post-processors": [
+		[
+			{
+				"type": "vagrant",
+				"vagrantfile_template": "Vagrantfile",
+				"keep_input_artifact": false
+			},
+			{
+				"type": "atlas",
+				"artifact": "{{ user `account_name` }}/{{ user `box_name` }}",
+				"artifact_type": "vagrant.box",
+				"metadata": {
+					"created_at": "{{timestamp}}",
+					"provider": "virtualbox",
+					"description": "Minimal CentOS 7.3 build",
+					"version": "{{user `version`}}"
+				}
+			}
+		]
+	]
+}
