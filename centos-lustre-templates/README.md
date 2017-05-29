@@ -244,11 +244,10 @@ https://github.com/mitchellh/vagrant/blob/master/keys/README.md
 
 The kickstart templates for this project maintain this convention, but it is not mandatory for private projects, or for users who wish to create production VMs (i.e. VMs that are not being made for Vagrant). If this is changed, be aware that the Packer templates depend on knowing the user name and password of an account on the guest VM and will need to be modified accordingly.
 
-The passwords are created using the following python one-liner:
+Passwords can be created using the following python one-liner, where the password being encrypted is the first argument to the 'crypt' method (i.e. 'vagrant'):
 
 	python -c 'import crypt; \
 	  print(crypt.crypt("vagrant",salt=crypt.METHOD_SHA512))'
-
 
 ## A Note on the Lustre Install
 
@@ -268,7 +267,7 @@ cd $HOME/Packer-templates/centos-lustre-templates
 
 Currently, only VirtualBox VMs are created. Additional builder types will be added over time.
 
-Versioning is currently restricted to 3 numerals in the form `x.y.z`. This is a limitation imposed by the Atlas software platform. Some Lustre releases may have an additional digit to denote hot fixes, in which case the version number in the template would need to be changed.
+Versioning of Vagrant boxes is currently restricted to 3 numerals in the form `x.y.z`. This is a limitation imposed by Hashicorp's software platform. Some Lustre releases may have an additional digit to denote hot fixes, in which case the version number in the template would need to be changed.
 
 An alternative may be to let Atlas manage the versioning automatically.
 
