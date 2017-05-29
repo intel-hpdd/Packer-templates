@@ -225,7 +225,7 @@ curl https://atlas.hashicorp.com/api/v1/box/malkolm/centos7-min \
   -X PUT -d box[is_private]=false
 ```
 
-Or use the `imlmakeboxpublic` bash function.
+Or use the `atlas-makeboxpublic` bash function.
 
 ## User accounts and SSH Keys in Vagrant Boxes
 
