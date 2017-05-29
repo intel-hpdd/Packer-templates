@@ -22,8 +22,6 @@ The repository for the Lustre developer Vagrant templates is here:
 
 https://github.com/intel-hpdd/Vagrantfiles
 
-
-
 ## Getting Started with the Templates
 
 ### Download and install Packer
@@ -181,14 +179,14 @@ Packer templates are written in JSON. The templates in this project comprise fou
 
 The CentOS base boxes are straightforward: 
 
-# centos73-1611-base-packerfile.json installs a base operating system with a minimum number of packages to get a working operating system.
-# centos73-1611-update-packerfile.json is the same as the base template but also runs an update against installed packages.
-# centos73-1611-builder-packerfile.json installs software development tools necessary to support devleopment of Lustre and ZFS, but does not install Lustre or ZFS source code. The builder profile also runs an update to make sure the base VM is up to date at time of creation.
+* centos73-1611-base-packerfile.json installs a base operating system with a minimum number of packages to get a working operating system.
+* centos73-1611-update-packerfile.json is the same as the base template but also runs an update against installed packages.
+* centos73-1611-builder-packerfile.json installs software development tools necessary to support devleopment of Lustre and ZFS, but does not install Lustre or ZFS source code. The builder profile also runs an update to make sure the base VM is up to date at time of creation.
 
 There are also two Lustre templates, one for clients and one for servers:
 
-# lustre-client-packerfile-el7.json
-# lustre-server-ldiskfs-packerfile-el7.json
+* lustre-client-packerfile-el7.json
+* lustre-server-ldiskfs-packerfile-el7.json
 
 These are built from the same base kickstart template as `centos73-1611-base-packerfile.json`, but add the Lustre client and Lustre server packages, respectively, creating ready-to-run Lustre VMs.
 
