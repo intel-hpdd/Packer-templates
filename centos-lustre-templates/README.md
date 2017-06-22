@@ -8,9 +8,9 @@ The VMs created by Packer are formatted into packages called "boxes" and can be 
 
 More information regarding Packer, Vagrant and Atlas can be found at their respective project web sites:
 
-https://www.packer.io/
-https://www.vagrantup.com/
-https://atlas.hashicorp.com/
+* https://www.packer.io/
+* https://www.vagrantup.com/
+* https://atlas.hashicorp.com/
 
 For those who are new to this suite of tools, the following site from the company behind these projects provides an introduction:
 
