@@ -14,15 +14,16 @@
 			"type": "virtualbox-iso",
 			"guest_os_type": "RedHat_64",
 			"iso_url":
-				"http://mirrors.kernel.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso",
+				"http://mirrors.kernel.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1708.iso",
 			"iso_checksum_url": "http://mirrors.kernel.org/centos/7/isos/x86_64/sha256sum.txt.asc",
 			"iso_checksum_type": "sha256",
 			"guest_additions_mode": "disable",
 			"headless": true,
 			"ssh_username": "root",
 			"ssh_password": "vagrant",
-			"ssh_timeout": "15m",
-			"http_directory" : "httpfiles",
+                        "ssh_timeout": "35m",
+                        "post_shutdown_delay": "15s",
+			"http_directory" : "../httpfiles",
 			"boot_command": [
 				"<tab><wait>",
 				" ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart/base.ks",
@@ -35,29 +36,29 @@
 	"provisioners": [
 		{
 			"type": "shell-local",
-			"command": "scripts/download-lustre-server-el7.sh {{user `version`}}"
+			"command": "../scripts/download-lustre-server-el7.sh {{user `version`}}"
 		},
 		{
 			"type": "shell-local",
-			"command": "scripts/download-lustre-e2fsprogs-el7.sh"
+			"command": "../scripts/download-lustre-e2fsprogs-el7.sh"
 		},
 		{
 			"type": "file",
-			"source": "rpms/lustre-server/{{user `version`}}/el7",
+			"source": "../rpms/lustre-server/{{user `version`}}/el7",
 			"destination": "/root/lustre-server",
 			"direction": "upload"
 		},
 		{
 			"type": "file",
-			"source": "rpms/lustre-e2fsprogs/el7",
+			"source": "../rpms/lustre-e2fsprogs/el7",
 			"destination": "/root/lustre-e2fsprogs",
 			"direction": "upload"
 		},
 		{
 			"type": "shell",
 			"scripts": [
-				"scripts/install-lustre-e2fsprogs-el7.sh",
-				"scripts/install-lustre-server-ldiskfs-el7.sh"
+				"../scripts/install-lustre-e2fsprogs-el7.sh",
+				"../scripts/install-lustre-server-ldiskfs-el7.sh"
 			]
 
 		}
@@ -67,21 +68,15 @@
 		[
 			{
 				"type": "vagrant",
-				"vagrantfile_template": "Vagrantfile",
+				"vagrantfile_template": "../Vagrantfile",
 				"keep_input_artifact": false
 			},
-			{
-				"type": "atlas",
-				"artifact": "{{user `account_name`}}/{{user `box_name`}}",
-				"artifact_type": "vagrant.box",
-				"metadata": {
-					"created_at": "{{timestamp}}",
-					"provider": "virtualbox",
-					"description":
-						"Lustre Server {{user `version`}} (CentOS 7.3) build",
-					"version": "{{user `version`}}"
-				}
-			}
+                        {
+                                "type": "vagrant-cloud",
+                                "box_tag": "{{ user `account_name` }}/{{ user `box_name` }}",
+                                "version": "{{user `version`}}",
+                                "version_description": "Lustre Server {{user `version`}} (CentOS 7.4) build"
+                        }
 		]
 	]
 

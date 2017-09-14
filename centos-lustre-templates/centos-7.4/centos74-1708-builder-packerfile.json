@@ -1,0 +1,64 @@
+{
+	"_comment": "Packer description for a CentOS 7 VM with developer tools",
+	"_comment": "and updates applied at time of box creation.",
+	"_comment": "Provides basis for building Lustre servers and",
+	"_comment": "clients (compute nodes)",
+
+	"variables": {
+		"account_name": "",
+		"box_name": "",
+		"version": ""
+	},
+
+	"builders": [
+		{
+			"vm_name": "CentOS-74-builder",
+			"type": "virtualbox-iso",
+			"guest_os_type": "RedHat_64",
+			"hard_drive_interface": "sata",
+			"iso_url":
+				"http://mirrors.kernel.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1708.iso",
+			"iso_checksum_url": "http://mirrors.kernel.org/centos/7/isos/x86_64/sha256sum.txt.asc",
+			"iso_checksum_type": "sha256",
+			"guest_additions_mode": "disable",
+			"headless": true,
+			"ssh_username": "vagrant",
+			"ssh_password": "vagrant",
+			"ssh_timeout": "25m",
+			"post_shutdown_delay": "15s",
+			"http_directory" : "../httpfiles",
+			"boot_command": [
+				"<tab><wait>",
+				" ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart/builder.ks",
+				"<enter>"
+			],
+			"shutdown_command": "sudo shutdown --poweroff now"
+		}
+	],
+
+	"provisioners": [
+		{
+			"type": "shell",
+			"execute_command": "chmod +x {{ .Path }}; sudo sh -c '{{ .Vars }} {{ .Path }}'",
+			"scripts": [
+				"../scripts/install-development-tools.sh",
+				"../scripts/run-update.sh"
+			]
+		}
+	],
+
+	"post-processors": [
+		[
+			{
+				"type": "vagrant",
+				"vagrantfile_template": "../Vagrantfile",
+				"keep_input_artifact": false
+			},
+			{
+				"type": "vagrant-cloud",
+				"box_tag": "{{ user `account_name` }}/{{ user `box_name` }}",
+				"version": "{{user `version`}}"
+			}
+		]
+	]
+}
