@@ -8,6 +8,7 @@ The VMs created by Packer are formatted into packages called "boxes" and can be 
 
 More information regarding Packer and Vagrant can be found at their respective project web sites:
 
+
 https://www.packer.io/
 https://www.vagrantup.com/
 
