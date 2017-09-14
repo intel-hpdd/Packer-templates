@@ -3,7 +3,7 @@
 
 if [ "$1" != "" ] && echo $1 | head -1 |awk '/^[0-9.]*$/{exit 0}{exit 1}'; then
   wget -N -r -np -l 1 -nd --accept .rpm --reject "*debuginfo*" \
-  -P rpms/lustre-client/$1/el7 \
+  -P ../rpms/lustre-client/$1/el7 \
   https://downloads.hpdd.intel.com/public/lustre/lustre-$1/el7/client/RPMS/x86_64
 else
   echo "ERROR: Invalid version number."
