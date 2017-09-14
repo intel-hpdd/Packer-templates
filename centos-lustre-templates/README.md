@@ -4,7 +4,7 @@ This repository contains standard templates to define base virtual machines usin
 
 The templates in this repository are currently able to create VirtualBox VMs, and are intended to support software developers, testers and those wishing to evaluate the Lustre file system and its supporting tools.
 
-The VMs created by Packer are formatted into packages called "boxes" and can be used as the basis for Vagrant projects. In addition to creating the boxes, these templates will also upload boxes to the Vagrant Cloud repository (Vagrant Cloud replaces the Atlas service provided by Hashicorp for sotrage of Vagrant images. Atlas still exists, providing services for commercial use, but the free tier has been moved to Vagrant Cloud).
+The VMs created by Packer are formatted into packages called "boxes" and can be used as the basis for Vagrant projects. In addition to creating the boxes, these templates will also upload boxes to the Vagrant Cloud repository (Vagrant Cloud replaces the Atlas service provided by Hashicorp for storage of Vagrant images. Atlas still exists, providing services for commercial use, but the free tier has been moved to Vagrant Cloud).
 
 More information regarding Packer and Vagrant can be found at their respective project web sites:
 
