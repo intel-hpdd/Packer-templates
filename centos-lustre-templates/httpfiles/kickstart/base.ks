@@ -39,6 +39,9 @@ selinux --disabled
 %end
 
 %post
+# Versionlock kernel-headers
+yum -y install yum-plugin-versionlock
+yum versionlock kernel-headers-3.10.0-693.el7.x86_64
 # Download the default public key for the vagrant user from the 
 # Vagrant GitHub project. Used by all public base boxes for first
 # time boot.
