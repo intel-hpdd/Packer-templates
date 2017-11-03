@@ -30,8 +30,6 @@ selinux --disabled
 %packages
 @core
 @base
-# Needed to compile/install the VBox Additions
-#@development
 %end
 
 %pre
@@ -41,7 +39,8 @@ selinux --disabled
 %post
 # Versionlock kernel-headers
 yum -y install yum-plugin-versionlock
-yum versionlock kernel-headers-3.10.0-693.el7.x86_64
+yum versionlock kernel-headers-3.10.0-693.2.2.el7.x86_64
+yum install -y kernel-3.10.0-693.2.2.el7.x86_64 kernel-tools-3.10.0-693.2.2.el7.x86_64
 # Download the default public key for the vagrant user from the 
 # Vagrant GitHub project. Used by all public base boxes for first
 # time boot.
