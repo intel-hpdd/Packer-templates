@@ -1,8 +1,6 @@
 {
-  "_comment": "Packer description for a minimal CentOS Server",
-  "_comment": "Provides basis for creating Lustre servers and",
-  "_comment": "clients (compute nodes)",
-
+  "_comment":
+    "Packer description for a minimal CentOS 6.6 Server. Provides basis for creating Lustre servers and clients (compute nodes).",
   "variables": {
     "account_name": "",
     "box_name": "",
@@ -28,7 +26,7 @@
       "http_directory": "../httpfiles",
       "boot_command": [
         "<tab><wait>",
-        " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart/base_el6.ks",
+        " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart/base_el6_6.ks",
         "<enter>"
       ]
     }

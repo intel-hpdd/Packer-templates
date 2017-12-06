@@ -28,11 +28,8 @@ openssh-clients
 # Prerequisites for installing VMware Tools or VirtualBox guest additions.
 # Put in kickstart to ensure first version installed is from install disk,
 # not latest from a mirror.
-kernel-headers
-kernel-devel
 gcc
 make
-perl
 curl
 wget
 # Other stuff
@@ -40,16 +37,6 @@ sudo
 nfs-utils
 -fprintd-pam
 -intltool
-# Selinux
-policycoreutils
-selinux-policy
-selinux-policy-targeted
-libselinux
-libselinux-utils
-libselinux-python
-# Workaround for selinux
--system-config-firewall-tui
-system-config-firewall-base
 
 # Microcode updates cannot work in a VM
 -microcode_ctl
@@ -71,6 +58,13 @@ system-config-firewall-base
 %end
 
 %post
+# Versionlock kernel-headers
+wget http://vault.centos.org/6.6/updates/x86_64/Packages/kernel-2.6.32-504.16.2.el6.x86_64.rpm
+wget http://vault.centos.org/6.6/updates/x86_64/Packages/kernel-devel-2.6.32-504.16.2.el6.x86_64.rpm
+wget http://vault.centos.org/6.6/updates/x86_64/Packages/kernel-headers-2.6.32-504.16.2.el6.x86_64.rpm
+yum -y install yum-plugin-versionlock
+yum install -y kernel-2.6.32-504.16.2.el6.x86_64.rpm kernel-headers-2.6.32-504.16.2.el6.x86_64.rpm kernel-devel-2.6.32-504.16.2.el6.x86_64.rpm
+yum versionlock kernel-headers-2.6.32-504.16.2.el6.x86_64
 # configure vagrant user in sudoers
 echo "%vagrant ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/vagrant
 chmod 0440 /etc/sudoers.d/vagrant
