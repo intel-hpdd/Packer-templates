@@ -1,0 +1,49 @@
+{
+  "_comment":
+    "Packer description for a minimal CentOS 6.8 Server. Provides basis for creating Lustre servers and clients (compute nodes).",
+  "variables": {
+    "account_name": "",
+    "box_name": "",
+    "version": ""
+  },
+
+  "builders": [
+    {
+      "vm_name": "CentOS-68-base",
+      "type": "virtualbox-iso",
+      "guest_os_type": "RedHat_64",
+      "hard_drive_interface": "sata",
+      "iso_url":
+        "http://archive.kernel.org/centos-vault/6.8/isos/x86_64/CentOS-6.8-x86_64-bin-DVD1.iso",
+      "iso_checksum_url":
+        "http://archive.kernel.org/centos-vault/6.8/isos/x86_64/sha256sum.txt.asc",
+      "iso_checksum_type": "sha256",
+      "guest_additions_mode": "disable",
+      "headless": true,
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_timeout": "15m",
+      "http_directory": "../httpfiles",
+      "boot_command": [
+        "<tab><wait>",
+        " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart/base_el6_8.ks",
+        "<enter>"
+      ]
+    }
+  ],
+
+  "post-processors": [
+    [
+      {
+        "type": "vagrant",
+        "vagrantfile_template": "../Vagrantfile",
+        "keep_input_artifact": false
+      },
+      {
+        "type": "vagrant-cloud",
+        "box_tag": "{{ user `account_name` }}/{{ user `box_name` }}",
+        "version": "{{user `version`}}"
+      }
+    ]
+  ]
+}
