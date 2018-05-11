@@ -16,8 +16,8 @@
 			"guest_os_type": "RedHat_64",
 			"hard_drive_interface": "sata",
 			"iso_url":
-				"http://repo1.dal.innoscale.net/centos/7.4.1708/isos/x86_64/CentOS-7-x86_64-DVD-1708.iso",
-			"iso_checksum_url": "http://repo1.dal.innoscale.net/centos/7.4.1708/isos/x86_64/sha256sum.txt.asc",
+				"https://mirrors.kernel.org/centos/7.4.1708/isos/x86_64/CentOS-7-x86_64-DVD-1708.iso",
+			"iso_checksum_url": "https://mirrors.kernel.org/centos/7.4.1708/isos/x86_64/sha256sum.txt.asc",
 			"iso_checksum_type": "sha256",
 			"guest_additions_mode": "disable",
 			"headless": true,
