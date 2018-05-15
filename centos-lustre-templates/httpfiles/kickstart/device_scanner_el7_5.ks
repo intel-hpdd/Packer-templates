@@ -48,6 +48,7 @@ yum versionlock kernel-headers-3.10.0-862.2.3.el7.x86_64
 rpm --import "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"
 yum-config-manager --add-repo http://download.mono-project.com/repo/centos7/
 yum install -y epel-release 
+yum install -y mock
 yum install -y yum-plugin-copr 
 yum install -y centos-release-dotnet
 yum install -y mono-devel 
@@ -58,7 +59,6 @@ yum install -y jq
 yum install -y git 
 yum install -y device-mapper-multipath 
 yum install -y iscsi-initiator-utils
-yum -y copr enable managerforlustre/manager-for-lustre
 
 # Download the default public key for the vagrant user from the 
 # Vagrant GitHub project. Used by all public base boxes for first
