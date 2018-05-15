@@ -61,11 +61,6 @@ yum install -y device-mapper-multipath
 yum install -y iscsi-initiator-utils
 
 adduser mockit
-passwd mockit <<EOF
-vagrant123
-vagrant123
-EOF
-
 usermod -aG mock mockit
 
 # Download the default public key for the vagrant user from the 
