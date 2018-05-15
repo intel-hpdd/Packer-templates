@@ -60,6 +60,14 @@ yum install -y git
 yum install -y device-mapper-multipath 
 yum install -y iscsi-initiator-utils
 
+adduser mockit
+passwd mockit <<EOF
+vagrant123
+vagrant123
+EOF
+
+usermod -aG mock mockit
+
 # Download the default public key for the vagrant user from the 
 # Vagrant GitHub project. Used by all public base boxes for first
 # time boot.
