@@ -49,6 +49,7 @@ rpm --import "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E032808
 yum-config-manager --add-repo http://download.mono-project.com/repo/centos7/
 yum install -y epel-release 
 yum install -y mock
+yum install -y rpkg
 yum install -y yum-plugin-copr 
 yum install -y centos-release-dotnet
 yum install -y mono-devel 
@@ -59,9 +60,10 @@ yum install -y jq
 yum install -y git 
 yum install -y device-mapper-multipath 
 yum install -y iscsi-initiator-utils
+yum install -y scl-utils-build
 
-adduser mockit
-usermod -aG mock mockit
+adduser mockbuild
+usermod -aG mock mockbuild
 
 # Download the default public key for the vagrant user from the 
 # Vagrant GitHub project. Used by all public base boxes for first
