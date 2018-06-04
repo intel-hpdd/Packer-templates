@@ -49,6 +49,7 @@ rpm --import "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E032808
 yum-config-manager --add-repo http://download.mono-project.com/repo/centos7/
 yum install -y epel-release 
 yum install -y mock
+yum install -y gcc
 yum install -y rpkg
 yum install -y yum-plugin-copr 
 yum install -y centos-release-dotnet
