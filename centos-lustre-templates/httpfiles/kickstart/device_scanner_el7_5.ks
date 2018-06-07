@@ -46,14 +46,14 @@ yum install -y kernel-3.10.0-862.2.3.el7.x86_64.rpm kernel-devel-3.10.0-862.2.3.
 yum versionlock kernel-headers-3.10.0-862.2.3.el7.x86_64
 
 rpm --import "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"
+rpm -Uvh https://packages.microsoft.com/config/rhel/7/packages-microsoft-prod.rpm
 yum-config-manager --add-repo http://download.mono-project.com/repo/centos7/
 yum install -y epel-release 
 yum install -y mock
 yum install -y rpkg
+yum install aspnetcore-runtime-2.1
 yum install -y yum-plugin-copr 
-yum install -y centos-release-dotnet
 yum install -y mono-devel 
-yum install -y rh-dotnet20
 yum install -y nodejs 
 yum install -y socat 
 yum install -y jq  
