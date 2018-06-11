@@ -52,7 +52,6 @@ yum-config-manager --add-repo http://download.mono-project.com/repo/centos7/
 yum install -y epel-release 
 yum install -y mock
 yum install -y gcc
-yum install -y rpkg
 yum install -y dotnet-sdk-2.1
 yum install -y yum-plugin-copr 
 yum install -y mono-devel 
@@ -63,7 +62,6 @@ yum install -y jq
 yum install -y git 
 yum install -y device-mapper-multipath 
 yum install -y iscsi-initiator-utils
-yum install -y scl-utils-build
 
 adduser mockbuild
 usermod -aG mock mockbuild
