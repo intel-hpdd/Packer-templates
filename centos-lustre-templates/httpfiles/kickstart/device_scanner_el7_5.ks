@@ -45,16 +45,18 @@ yum -y install yum-plugin-versionlock
 yum install -y kernel-3.10.0-862.2.3.el7.x86_64.rpm kernel-devel-3.10.0-862.2.3.el7.x86_64.rpm kernel-headers-3.10.0-862.2.3.el7.x86_64.rpm
 yum versionlock kernel-headers-3.10.0-862.2.3.el7.x86_64
 
+wget -P /etc/yum.repos.d https://copr.fedorainfracloud.org/coprs/managerforlustre/manager-for-lustre-devel/repo/epel-7/managerforlustre-manager-for-lustre-devel-epel-7.repo
 rpm --import "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"
+rpm -Uvh https://packages.microsoft.com/config/rhel/7/packages-microsoft-prod.rpm
 yum-config-manager --add-repo http://download.mono-project.com/repo/centos7/
 yum install -y epel-release 
 yum install -y mock
 yum install -y rpkg
+yum install -y dotnet-sdk-2.1
 yum install -y yum-plugin-copr 
-yum install -y centos-release-dotnet
 yum install -y mono-devel 
-yum install -y rh-dotnet20
 yum install -y nodejs 
+yum install -y npm
 yum install -y socat 
 yum install -y jq  
 yum install -y git 
