@@ -1,0 +1,75 @@
+{
+	"_comment": "Packer description for a base CentOS 7.5 server to build Mellanox against Lutre Kernel",
+	"variables": {
+		"account_name": "",
+		"box_name": "",
+		"version": "",
+		"cloud_token": "{{ env `ATLAS_TOKEN` }}"
+	},
+	"builders": [
+		{
+			"vm_name": "lustre_mellanox",
+			"type": "virtualbox-iso",
+			"guest_os_type": "RedHat_64",
+			"hard_drive_interface": "sata",
+			"iso_url":
+				"https://mirrors.edge.kernel.org/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-DVD-1804.iso",
+			"iso_checksum_url": "https://mirrors.edge.kernel.org/centos/7.5.1804/isos/x86_64/sha256sum.txt.asc",
+			"iso_checksum_type": "sha256",
+			"guest_additions_mode": "disable",
+			"headless": true,
+			"ssh_username": "vagrant",
+			"ssh_password": "vagrant",
+			"ssh_timeout": "35m",
+			"post_shutdown_delay": "15s",
+      "http_directory" : "../httpfiles",
+      "http_port_min": "8592",
+      "http_port_max": "8592",
+			"boot_command": [
+				"<tab><wait>",
+				" ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart/lustre_mellanox_el7_5_63.ks",
+				"<enter>"
+			],
+			"shutdown_command": "sudo shutdown --poweroff now"
+		}
+	],
+	"provisioners": [
+		{
+			"type": "file",
+			"source": "kernel-3.10.0-862.6.3.el7_lustre.x86_64.rpm",
+			"destination": "/tmp/kernel-3.10.0-862.6.3.el7_lustre.x86_64.rpm"
+		},
+		{
+			"type": "file",
+			"source": "kernel-devel-3.10.0-862.6.3.el7_lustre.x86_64.rpm",
+			"destination": "/tmp/kernel-devel-3.10.0-862.6.3.el7_lustre.x86_64.rpm"
+		},
+		{
+			"type": "file",
+			"source": "kernel-headers-3.10.0-862.6.3.el7_lustre.x86_64.rpm",
+			"destination": "/tmp/kernel-headers-3.10.0-862.6.3.el7_lustre.x86_64.rpm"
+		},
+		{
+			"type": "shell",
+			"inline": [
+				"sudo yum install -y /tmp/kernel-3.10.0-862.6.3.el7_lustre.x86_64.rpm",
+				"sudo yum install -y /tmp/kernel-devel-3.10.0-862.6.3.el7_lustre.x86_64.rpm",
+				"sudo yum install -y /tmp/kernel-headers-3.10.0-862.6.3.el7_lustre.x86_64.rpm"
+			]
+		}
+	],
+	"post-processors": [
+		[
+			{
+				"type": "vagrant",
+				"vagrantfile_template": "../Vagrantfile",
+				"keep_input_artifact": false
+			},
+			{
+				"type": "vagrant-cloud",
+				"box_tag": "{{ user `account_name` }}/{{ user `box_name` }}",
+				"version": "{{user `version`}}"
+			}
+		]
+	]
+}
