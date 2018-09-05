@@ -38,12 +38,12 @@ selinux --disabled
 
 %post
 # Versionlock kernel-headers
-wget http://mirror.centos.org/centos/7.5.1804/updates/x86_64/Packages/kernel-3.10.0-862.2.3.el7.x86_64.rpm
-wget http://mirror.centos.org/centos/7.5.1804/updates/x86_64/Packages/kernel-devel-3.10.0-862.2.3.el7.x86_64.rpm
-wget http://mirror.centos.org/centos/7.5.1804/updates/x86_64/Packages/kernel-headers-3.10.0-862.2.3.el7.x86_64.rpm
+wget http://mirror.centos.org/centos/7.5.1804/updates/x86_64/Packages/kernel-3.10.0-862.9.1.el7.x86_64.rpm
+wget http://mirror.centos.org/centos/7.5.1804/updates/x86_64/Packages/kernel-devel-3.10.0-862.9.1.el7.x86_64.rpm
+wget http://mirror.centos.org/centos/7.5.1804/updates/x86_64/Packages/kernel-headers-3.10.0-862.9.1.el7.x86_64.rpm
 yum -y install yum-plugin-versionlock
-yum install -y kernel-3.10.0-862.2.3.el7.x86_64.rpm kernel-devel-3.10.0-862.2.3.el7.x86_64.rpm kernel-headers-3.10.0-862.2.3.el7.x86_64.rpm
-yum versionlock kernel-headers-3.10.0-862.2.3.el7.x86_64
+yum install -y kernel-3.10.0-862.9.1.el7.x86_64.rpm kernel-devel-3.10.0-862.9.1.el7.x86_64.rpm kernel-headers-3.10.0-862.9.1.el7.x86_64.rpm
+yum versionlock kernel-headers-3.10.0-862.9.1.el7.x86_64
 # Download the default public key for the vagrant user from the 
 # Vagrant GitHub project. Used by all public base boxes for first
 # time boot.
